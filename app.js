@@ -40,6 +40,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const categoryCards = document.querySelectorAll('.category-photo-card');
   const btnVerTodas = document.getElementById('btnVerTodas');
   const desktopFavCount = document.getElementById('desktopFavCount');
+  const heroFavBadge = document.getElementById('heroFavBadge');
+  const heroFavCount = document.getElementById('heroFavCount');
   const navFavoritos = document.getElementById('navFavoritos');
   const bottomNavFavoritos = document.getElementById('bottomNavFavoritos');
   const bottomNavInicio = document.getElementById('bottomNavInicio');
@@ -444,6 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateFavBadges() {
     const count = state.favorites.length;
     if (desktopFavCount) desktopFavCount.textContent = count;
+    if (heroFavCount) heroFavCount.textContent = count;
   }
 
   // 11. DETAIL VIEW EVENTS
@@ -568,6 +571,19 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Navigation Links
+  if (heroFavBadge) {
+    heroFavBadge.addEventListener('click', (e) => {
+      e.preventDefault();
+      state.onlyFavorites = true;
+      state.category = '';
+      state.search = '';
+      state.page = 1;
+      if (state.currentView !== 'home') showHomeView(true);
+      renderSuppliers();
+      document.getElementById('fornecedoresSection').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
   if (navFavoritos) {
     navFavoritos.addEventListener('click', (e) => {
       e.preventDefault();
