@@ -142,6 +142,11 @@ img {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   text-align: center;
   touch-action: manipulation;
+  text-decoration: none;
+}
+
+.btn > * {
+  pointer-events: none;
 }
 
 .btn-primary {
