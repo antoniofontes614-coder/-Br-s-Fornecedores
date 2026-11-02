@@ -69,12 +69,23 @@ document.addEventListener('DOMContentLoaded', () => {
   handleScroll();
 
   // ------------------------------------------------------------------------
-  // 3. CHECKOUT CTAs (ROLA ATÉ A SEÇÃO DE OFERTA E DISPARA EVENTO META ADS)
+  // 3. CHECKOUT CTAs (LINK DIRETO CAKTO + META PIXEL INITIATECHECKOUT)
   // ------------------------------------------------------------------------
+  const CAKTO_CHECKOUT_URL = 'https://pay.cakto.com.br/dega2d9_1273419';
   const checkoutButtons = document.querySelectorAll('.btn-checkout');
 
   checkoutButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      const href = btn.getAttribute('href');
+
+      // Se for link de âncora interna (ex: #oferta), deixa rolar suavemente
+      if (href && href.startsWith('#')) {
+        return;
+      }
+
+      // Previne navegação imediata para garantir o envio do pixel
+      e.preventDefault();
+
       // Dispara evento padrão InitiateCheckout do Meta Pixel
       if (typeof window.fbq === 'function') {
         window.fbq('track', 'InitiateCheckout', {
@@ -85,10 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
 
-      const offerEl = document.getElementById('oferta');
-      if (offerEl) {
-        offerEl.scrollIntoView({ behavior: 'smooth' });
-      }
+      // Redireciona com segurança para a Cakto
+      setTimeout(() => {
+        window.location.href = CAKTO_CHECKOUT_URL;
+      }, 120);
     });
   });
 
