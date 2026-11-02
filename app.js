@@ -553,7 +553,24 @@ document.addEventListener('DOMContentLoaded', () => {
   categoryCards.forEach(card => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
+      if (card.id === 'cardGuiaDoBras') {
+        if (typeof window.fbq === 'function') {
+          window.fbq('track', 'ViewContent', {
+            content_name: 'Guia do Brás',
+            content_category: 'Roteiro e Polos'
+          });
+        }
+        const guiaSection = document.getElementById('guiaDoBrasSection');
+        if (guiaSection) {
+          guiaSection.style.display = 'block';
+          guiaSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        return;
+      }
       const cat = card.getAttribute('data-cat') || '';
+      if (typeof window.fbq === 'function' && cat) {
+        window.fbq('trackCustom', 'ViewCategory', { category_name: cat });
+      }
       state.category = cat;
       state.onlyFavorites = false;
       state.search = '';
@@ -568,6 +585,18 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('fornecedoresSection').scrollIntoView({ behavior: 'smooth' });
     });
   });
+
+  const btnBackFromGuia = document.getElementById('btnBackFromGuia');
+  if (btnBackFromGuia) {
+    btnBackFromGuia.addEventListener('click', (e) => {
+      e.preventDefault();
+      const guiaSection = document.getElementById('guiaDoBrasSection');
+      if (guiaSection) {
+        guiaSection.style.display = 'none';
+        document.getElementById('categoryGrid').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
 
   // Mobile Category Chips Click (One-Hand Touch)
   categoryChips.forEach(chip => {

@@ -22,6 +22,24 @@
   
   <!-- App Stylesheet (Mobile First) -->
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '2291339678378032');
+    fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2291339678378032&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
 </head>
 <body>
 
@@ -102,10 +120,6 @@
           </div>
 
           <div class="category-grid" id="categoryGrid">
-            <a class="category-card category-photo-card" href="#fornecedoresSection" data-cat="Shoppings e galerias">
-              <img alt="Shoppings e galerias" loading="lazy" width="420" height="300" class="category-photo" src="assets/categories/11-shoppings-galerias.png" />
-              <div class="category-meta"><b>Shoppings e galerias</b></div>
-            </a>
             <a class="category-card category-photo-card" href="#fornecedoresSection" data-cat="Moda Feminina">
               <img alt="Moda Feminina" loading="lazy" width="420" height="300" class="category-photo" src="assets/categories/01-moda-feminina.png" />
               <div class="category-meta"><b>Moda Feminina</b></div>
@@ -146,6 +160,70 @@
               <img alt="Feirinha da Madrugada / Bônus" loading="lazy" width="420" height="300" class="category-photo" src="assets/categories/10-feirinha-madrugada-bonus.png" />
               <div class="category-meta"><b>Feirinha da Madrugada / Bônus</b></div>
             </a>
+            <a class="category-card category-photo-card" href="#fornecedoresSection" data-cat="Shoppings e galerias">
+              <img alt="Shoppings e galerias" loading="lazy" width="420" height="300" class="category-photo" src="assets/categories/11-shoppings-galerias.png" />
+              <div class="category-meta"><b>Shoppings e galerias</b></div>
+            </a>
+            <a class="category-card category-photo-card cat-card-guia" href="#guiaDoBrasSection" id="cardGuiaDoBras">
+              <div style="position:relative; width:100%; height:120px; overflow:hidden; background:#1c1524;">
+                <span class="cat-novo-badge">Novo!</span>
+                <img alt="Guia do Brás" loading="lazy" width="420" height="300" class="category-photo" src="assets/categories/12-guia-do-bras.png" />
+              </div>
+              <div class="category-meta cat-meta-guia">
+                <div class="cat-meta-guia-info">
+                  <b>Guia do <span style="color:#f4b942;">Brás</span></b>
+                  <small>Encontre, chegue e compre melhor!</small>
+                </div>
+                <span class="cat-arrow-btn">›</span>
+              </div>
+            </a>
+          </div>
+        </section>
+
+        <!-- SEÇÃO: GUIA DO BRÁS NO APLICATIVO -->
+        <section class="section-guia-app" id="guiaDoBrasSection" style="display:none;">
+          <div class="guia-app-container">
+            <div class="guia-app-top">
+              <span class="guia-badge-novo">Novo!</span>
+              <h3>Guia do <span style="color:#f4b942;">Brás</span></h3>
+              <p>Encontre, chegue e compre melhor! Roteiro estratégico dos principais polos atacadistas.</p>
+              <button type="button" class="btn-close-guia" id="btnBackFromGuia">✕ Fechar Guia</button>
+            </div>
+
+            <div class="guia-app-grid">
+              <div class="guia-app-item">
+                <span class="guia-app-icon">📍</span>
+                <div>
+                  <b>Caldeirão da Juta</b>
+                  <p>Polo tradicional de confecções atacadistas. Roupas femininas com preço de fábrica e alta rotatividade.</p>
+                  <small>Rua da Juta / Barão de Ladário</small>
+                </div>
+              </div>
+              <div class="guia-app-item">
+                <span class="guia-app-icon">👗</span>
+                <div>
+                  <b>Rua Miller &amp; Maria Marcolina</b>
+                  <p>O centro da moda feminina, vestidos e alfaiataria fina para lojistas e revendedoras.</p>
+                  <small>Rua Miller / Rua Maria Marcolina</small>
+                </div>
+              </div>
+              <div class="guia-app-item">
+                <span class="guia-app-icon">👖</span>
+                <div>
+                  <b>Circuito do Jeans &amp; Lingerie</b>
+                  <p>Rua Xavantes e Rua Oriente: maior polo de jeanswear e confecção de moda íntima com pronta entrega.</p>
+                  <small>Rua Xavantes / Rua Oriente</small>
+                </div>
+              </div>
+              <div class="guia-app-item">
+                <span class="guia-app-icon">🏢</span>
+                <div>
+                  <b>Shoppings e Galerias</b>
+                  <p>Mega Polo, Shopping 900, Shopping Barão 125, Shopping Vautier e Galeria Pagé com conforto e ar-condicionado.</p>
+                  <small>Monsenhor Andrade / Vautier</small>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 

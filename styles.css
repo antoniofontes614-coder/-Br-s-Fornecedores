@@ -486,6 +486,169 @@ button:active, .button:active, .icon-button:active, .chip:active {
   line-height: 1.25;
 }
 
+/* Card e Seção Guia do Brás */
+.cat-card-guia {
+  background: linear-gradient(180deg, #1f1826 0%, #141018 100%) !important;
+  border: 1.5px solid rgba(244, 185, 66, 0.45) !important;
+  cursor: pointer;
+  position: relative;
+  text-decoration: none;
+}
+
+.cat-card-guia:hover {
+  border-color: #f4b942 !important;
+  box-shadow: 0 6px 18px rgba(244, 185, 66, 0.25) !important;
+}
+
+.cat-novo-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: linear-gradient(135deg, #ffc837 0%, #f4b942 100%);
+  color: #171217;
+  font-family: var(--font-display, inherit);
+  font-size: 9.5px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  z-index: 5;
+  line-height: 1.2;
+}
+
+.cat-meta-guia {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  text-align: left !important;
+  padding: 8px 10px !important;
+}
+
+.cat-meta-guia-info {
+  flex: 1;
+}
+
+.cat-meta-guia-info b {
+  color: #ffffff !important;
+  font-size: 12.5px;
+  display: block;
+}
+
+.cat-meta-guia-info small {
+  color: #d8c9d2;
+  font-size: 10px;
+  line-height: 1.3;
+  display: block;
+  margin-top: 2px;
+}
+
+.cat-arrow-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffc837 0%, #f4b942 100%);
+  color: #171217;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(244, 185, 66, 0.35);
+}
+
+.section-guia-app {
+  background: #141117;
+  border: 1.5px solid rgba(244, 185, 66, 0.35);
+  border-radius: 16px;
+  padding: 18px 14px;
+  margin: 16px 0;
+  color: #ffffff;
+}
+
+.guia-app-top {
+  position: relative;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.guia-app-top .guia-badge-novo {
+  background: linear-gradient(135deg, #ffc837 0%, #f4b942 100%);
+  color: #171217;
+  font-size: 9.5px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+.guia-app-top h3 {
+  font-size: 18px;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.guia-app-top p {
+  font-size: 13px;
+  color: #d8c9d2;
+  margin-bottom: 10px;
+}
+
+.btn-close-guia {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f1dfe6;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.guia-app-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.guia-app-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.guia-app-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.guia-app-item b {
+  display: block;
+  font-size: 13.5px;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.guia-app-item p {
+  font-size: 12.5px;
+  color: #d8c9d2;
+  line-height: 1.4;
+  margin-bottom: 4px;
+}
+
+.guia-app-item small {
+  color: #f4b942;
+  font-size: 11px;
+  font-weight: 600;
+}
+
 /* --------------------------------------------------------------------------
    9. SUPPLIERS GRID & CARDS (MOBILE FIRST - TOUCH FRIENDLY)
    -------------------------------------------------------------------------- */
