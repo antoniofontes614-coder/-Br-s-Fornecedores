@@ -69,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
   handleScroll();
 
   // ------------------------------------------------------------------------
-  // 3. CHECKOUT CTAs (LINK DIRETO CAKTO + META PIXEL INITIATECHECKOUT)
+  // 3. CHECKOUT CTAs (LINK DIRETO CAKTO — SEM DUPLICAR INITIATECHECKOUT)
+  // O evento InitiateCheckout é disparado nativamente pela própria Cakto.
   // ------------------------------------------------------------------------
   const CAKTO_CHECKOUT_URL = 'https://pay.cakto.com.br/dega2d9_1273419';
   const checkoutButtons = document.querySelectorAll('.btn-checkout');
@@ -83,23 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Previne navegação imediata para garantir o envio do pixel
-      e.preventDefault();
-
-      // Dispara evento padrão InitiateCheckout do Meta Pixel
-      if (typeof window.fbq === 'function') {
-        window.fbq('track', 'InitiateCheckout', {
-          content_name: 'Fornecedores Top Brás',
-          content_category: 'Guia Digital',
-          value: 29.90,
-          currency: 'BRL'
-        });
-      }
-
-      // Redireciona com segurança para a Cakto
-      setTimeout(() => {
+      // Se for button sem href nativo, redireciona para a Cakto
+      if (btn.tagName === 'BUTTON') {
+        e.preventDefault();
         window.location.href = CAKTO_CHECKOUT_URL;
-      }, 120);
+      }
     });
   });
 
