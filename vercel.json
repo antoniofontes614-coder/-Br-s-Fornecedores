@@ -1,0 +1,51 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/fornecedores/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/buscar",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/favoritos",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/meus-fornecedores",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    },
+    {
+      "source": "/(styles.css|app.js|fornecedores_data.js)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    }
+  ]
+}
