@@ -38,13 +38,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const btnCarregarMais = document.getElementById('btnCarregarMais');
   const loadMoreBox = document.getElementById('loadMoreBox');
   const categoryCards = document.querySelectorAll('.category-photo-card');
+  const categoryChips = document.querySelectorAll('.category-chips-bar .chip');
   const btnVerTodas = document.getElementById('btnVerTodas');
   const desktopFavCount = document.getElementById('desktopFavCount');
+  const mobileFavBadge = document.getElementById('mobileFavBadge');
+  const btnClearSearch = document.getElementById('btnClearSearch');
   const navFavoritos = document.getElementById('navFavoritos');
   const bottomNavFavoritos = document.getElementById('bottomNavFavoritos');
   const bottomNavInicio = document.getElementById('bottomNavInicio');
   const bottomNavBuscar = document.getElementById('bottomNavBuscar');
   const bottomNavFornecedores = document.getElementById('bottomNavFornecedores');
+  const bottomNavPerfil = document.getElementById('bottomNavPerfil');
+  const btnPassoAPasso = document.getElementById('btnPassoAPasso');
   const toast = document.getElementById('toast');
 
   // Detail elements
@@ -444,6 +449,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function updateFavBadges() {
     const count = state.favorites.length;
     if (desktopFavCount) desktopFavCount.textContent = count;
+    if (mobileFavBadge) {
+      mobileFavBadge.textContent = count;
+      mobileFavBadge.style.display = count > 0 ? 'inline-block' : 'none';
+    }
   }
 
   // 11. DETAIL VIEW EVENTS
@@ -502,13 +511,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2500);
   }
 
-  // 13. FILTER TRIGGERS
+  // 13. FILTER & CHIP TRIGGERS
+  function updateActiveChips(cat) {
+    categoryChips.forEach(chip => {
+      const chipCat = chip.getAttribute('data-cat') || '';
+      if (chipCat === cat) {
+        chip.classList.add('active');
+        try {
+          chip.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        } catch (e) {}
+      } else {
+        chip.classList.remove('active');
+      }
+    });
+  }
+
   function resetAllFilters() {
     state.search = '';
     state.category = '';
     state.onlyFavorites = false;
     state.page = 1;
-    if (mainSearchInput) mainSearchInput.value = '';
+    if (mainSearchInput) {
+      mainSearchInput.value = '';
+      if (btnClearSearch) btnClearSearch.style.display = 'none';
+    }
+    updateActiveChips('');
     renderSuppliers();
   }
 
@@ -522,29 +549,67 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Category Cards Click
+  // Category Cards Click (Grid)
   categoryCards.forEach(card => {
     card.addEventListener('click', (e) => {
       e.preventDefault();
-      const cat = card.getAttribute('data-cat');
+      const cat = card.getAttribute('data-cat') || '';
       state.category = cat;
       state.onlyFavorites = false;
       state.search = '';
       state.page = 1;
-      if (mainSearchInput) mainSearchInput.value = '';
+      if (mainSearchInput) {
+        mainSearchInput.value = '';
+        if (btnClearSearch) btnClearSearch.style.display = 'none';
+      }
+      updateActiveChips(cat);
       if (state.currentView !== 'home') showHomeView(true);
       renderSuppliers();
       document.getElementById('fornecedoresSection').scrollIntoView({ behavior: 'smooth' });
     });
   });
 
-  // Search input & form
+  // Mobile Category Chips Click (One-Hand Touch)
+  categoryChips.forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      e.preventDefault();
+      const cat = chip.getAttribute('data-cat') || '';
+      state.category = cat;
+      state.onlyFavorites = false;
+      state.search = '';
+      state.page = 1;
+      if (mainSearchInput) {
+        mainSearchInput.value = '';
+        if (btnClearSearch) btnClearSearch.style.display = 'none';
+      }
+      updateActiveChips(cat);
+      if (state.currentView !== 'home') showHomeView(true);
+      renderSuppliers();
+      document.getElementById('fornecedoresSection').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Search input & form with clear button
   if (mainSearchInput) {
     mainSearchInput.addEventListener('input', (e) => {
       state.search = e.target.value;
       state.page = 1;
+      if (btnClearSearch) {
+        btnClearSearch.style.display = state.search ? 'flex' : 'none';
+      }
       if (state.currentView !== 'home') showHomeView(true);
       renderSuppliers();
+    });
+  }
+
+  if (btnClearSearch) {
+    btnClearSearch.addEventListener('click', () => {
+      if (mainSearchInput) mainSearchInput.value = '';
+      btnClearSearch.style.display = 'none';
+      state.search = '';
+      state.page = 1;
+      renderSuppliers();
+      if (mainSearchInput) mainSearchInput.focus();
     });
   }
 
@@ -567,6 +632,23 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Safe buy step by step button
+  if (btnPassoAPasso) {
+    btnPassoAPasso.addEventListener('click', () => {
+      const safeList = document.querySelector('.safe-list');
+      if (safeList) {
+        safeList.scrollIntoView({ behavior: 'smooth' });
+        showToast('📋 Confira as orientações de compra segura!');
+      }
+    });
+  }
+
+  // Bottom Navigation Active Highlighter
+  function setBottomNavActive(activeEl) {
+    document.querySelectorAll('.bottom-nav a').forEach(el => el.classList.remove('active'));
+    if (activeEl) activeEl.classList.add('active');
+  }
+
   // Navigation Links
   if (navFavoritos) {
     navFavoritos.addEventListener('click', (e) => {
@@ -575,6 +657,7 @@ document.addEventListener('DOMContentLoaded', () => {
       state.category = '';
       state.search = '';
       state.page = 1;
+      updateActiveChips('');
       if (state.currentView !== 'home') showHomeView(true);
       renderSuppliers();
       document.getElementById('fornecedoresSection').scrollIntoView({ behavior: 'smooth' });
@@ -584,10 +667,12 @@ document.addEventListener('DOMContentLoaded', () => {
   if (bottomNavFavoritos) {
     bottomNavFavoritos.addEventListener('click', (e) => {
       e.preventDefault();
+      setBottomNavActive(bottomNavFavoritos);
       state.onlyFavorites = true;
       state.category = '';
       state.search = '';
       state.page = 1;
+      updateActiveChips('');
       if (state.currentView !== 'home') showHomeView(true);
       renderSuppliers();
       document.getElementById('fornecedoresSection').scrollIntoView({ behavior: 'smooth' });
@@ -597,14 +682,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (bottomNavInicio) {
     bottomNavInicio.addEventListener('click', (e) => {
       e.preventDefault();
+      setBottomNavActive(bottomNavInicio);
       resetAllFilters();
       showHomeView(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   }
 
   if (bottomNavBuscar) {
     bottomNavBuscar.addEventListener('click', (e) => {
       e.preventDefault();
+      setBottomNavActive(bottomNavBuscar);
       if (state.currentView !== 'home') showHomeView(true);
       document.getElementById('fornecedoresSection').scrollIntoView({ behavior: 'smooth' });
       if (mainSearchInput) mainSearchInput.focus();
@@ -614,8 +702,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (bottomNavFornecedores) {
     bottomNavFornecedores.addEventListener('click', (e) => {
       e.preventDefault();
+      setBottomNavActive(bottomNavFornecedores);
       if (state.currentView !== 'home') showHomeView(true);
       document.getElementById('fornecedoresSection').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  if (bottomNavPerfil) {
+    bottomNavPerfil.addEventListener('click', (e) => {
+      e.preventDefault();
+      setBottomNavActive(bottomNavPerfil);
+      if (state.currentView !== 'home') showHomeView(true);
+      document.getElementById('compra-segura').scrollIntoView({ behavior: 'smooth' });
     });
   }
 
