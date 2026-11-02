@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const mapsUrl = s.mapsUrl || `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(destination)}`;
 
-    // Build Detail Items (Exact Vercel layout)
+    // Build Detail Items (Detail layout)
     const prods = (s.produtos && s.produtos.length > 0) ? s.produtos.join(', ') : 'Veja o catálogo nos canais do fornecedor';
     const subcats = (s.subcategorias && s.subcategorias.length > 0) ? s.subcategorias.join(', ') : 'Consulte as opções disponíveis';
     const tel = s.telefone_principal || s.whatsapp || 'Não informado';
