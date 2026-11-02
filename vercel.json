@@ -4,31 +4,19 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/app",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/acesso",
-      "destination": "/app.html"
-    },
-    {
       "source": "/fornecedores/(.*)",
-      "destination": "/app.html"
+      "destination": "/index.html"
     },
     {
       "source": "/buscar",
-      "destination": "/app.html"
+      "destination": "/index.html"
     },
     {
       "source": "/favoritos",
-      "destination": "/app.html"
+      "destination": "/index.html"
     },
     {
       "source": "/meus-fornecedores",
-      "destination": "/app.html"
-    },
-    {
-      "source": "/landing",
       "destination": "/index.html"
     }
   ],
@@ -51,7 +39,7 @@
       ]
     },
     {
-      "source": "/(styles.css|app.js|app.css|app-fornecedores.js|fornecedores_data.js)",
+      "source": "/(styles.css|app.js|fornecedores_data.js)",
       "headers": [
         {
           "key": "Cache-Control",
