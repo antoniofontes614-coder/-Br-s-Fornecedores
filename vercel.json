@@ -2,6 +2,24 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/fornecedores/(.*)",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/buscar",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/favoritos",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/meus-fornecedores",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -30,7 +48,7 @@
       ]
     },
     {
-      "source": "/(styles.css|app.js)",
+      "source": "/(styles.css|app.js|fornecedores_data.js)",
       "headers": [
         {
           "key": "Cache-Control",
